@@ -2,8 +2,10 @@ $exe_file = "C:\Tools\SharpHound\SharpHound.exe"
 $prefix = "SharpHound"
 
 # Create and move into workdir
+$currdir = Get-Location
 $now = Get-Date -Format "yyyyMMddTHHmmss"
-$workdir = New-Item -ItemType "directory" -Path "." -Name "$prefix-$now"
+$personal = [Environment]::GetFolderPath("Personal")
+$workdir = New-Item -ItemType "directory" -Path "$personal" -Name "$prefix-$now"
 Set-Location -Path "$workdir"
 
 # Run SharpHound
@@ -12,4 +14,4 @@ Write-Host "[*] Executing: $command" -ForegroundColor Yellow | Tee-Object -FileP
 Invoke-Expression -Command "$command" | Tee-Object -FilePath "SharpHound.log" -Append
 
 # Go back
-Set-Location -Path ".."
+Set-Location -Path "$currdir"
