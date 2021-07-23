@@ -3,7 +3,7 @@ $prefix = "SharpHound"
 
 # Create and move into workdir
 $currdir = Get-Location
-$now = Get-Date -Format "yyyyMMddTHHmmss"
+$now = $(Get-Date).ToUniversalTime().ToString("yyyyMMddTHHmmssZ")
 $personal = [Environment]::GetFolderPath("Personal")
 $workdir = New-Item -ItemType "directory" -Path "$personal" -Name "$prefix-$now"
 Set-Location -Path "$workdir"
